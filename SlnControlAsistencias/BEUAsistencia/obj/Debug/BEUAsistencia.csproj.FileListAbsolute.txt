@@ -1,0 +1,12 @@
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\obj\Debug\BEUAsistencia.csproj.CoreCompileInputs.cache
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\bin\Debug\BEUAsistencia.dll.config
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\bin\Debug\BEUAsistencia.dll
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\bin\Debug\BEUAsistencia.pdb
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\bin\Debug\EntityFramework.dll
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\bin\Debug\EntityFramework.xml
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\obj\Debug\BEUAsistencia.csproj.CopyComplete
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\obj\Debug\BEUAsistencia.dll
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\obj\Debug\BEUAsistencia.pdb
+C:\Users\crisv\source\repos\Certificacion I\SlnControlAsistencias\BEUAsistencia\obj\Debug\BEUAsistencia.csprojAssemblyReference.cache

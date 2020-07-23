@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ControlAsistenciaModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Asistencia">
+    <Key>
+      <PropertyRef Name="id_asis" />
+    </Key>
+    <Property Name="id_asis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="fecha_ingreso" Type="DateTime" Precision="0" />
+    <Property Name="fecha_salida" Type="DateTime" Precision="0" />
+    <Property Name="id_emp" Type="Int32" />
+    <NavigationProperty Name="Empleado" Relationship="Self.FK_Asistencia_Empleado" FromRole="Asistencia" ToRole="Empleado" />
+    <NavigationProperty Name="Informe" Relationship="Self.fk1" FromRole="Asistencia" ToRole="Informe" />
+  </EntityType>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="id_emp" />
+    </Key>
+    <Property Name="id_emp" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="nombre_completo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="telefono" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="correo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="cedula" Type="String" MaxLength="13" FixedLength="false" Unicode="false" />
+    <Property Name="lugar_nacimiento" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="sexo" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+    <Property Name="estado_civil" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="area_trabajo" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Asistencia" Relationship="Self.FK_Asistencia_Empleado" FromRole="Empleado" ToRole="Asistencia" />
+    <NavigationProperty Name="Informe" Relationship="Self.fk2" FromRole="Empleado" ToRole="Informe" />
+  </EntityType>
+  <EntityType Name="Informe">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="pago_empleado" Type="Double" />
+    <Property Name="id_asis" Type="Int32" />
+    <Property Name="id_emp" Type="Int32" />
+    <Property Name="dias_trabajo" Type="Double" />
+    <NavigationProperty Name="Asistencia" Relationship="Self.fk1" FromRole="Informe" ToRole="Asistencia" />
+    <NavigationProperty Name="Empleado" Relationship="Self.fk2" FromRole="Informe" ToRole="Empleado" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <Association Name="FK_Asistencia_Empleado">
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+    <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="id_emp" />
+      </Principal>
+      <Dependent Role="Asistencia">
+        <PropertyRef Name="id_emp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk1">
+    <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Informe" Type="Self.Informe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asistencia">
+        <PropertyRef Name="id_asis" />
+      </Principal>
+      <Dependent Role="Informe">
+        <PropertyRef Name="id_asis" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk2">
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Informe" Type="Self.Informe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="id_emp" />
+      </Principal>
+      <Dependent Role="Informe">
+        <PropertyRef Name="id_emp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Asistencia" EntityType="Self.Asistencia" />
+    <EntitySet Name="Empleado" EntityType="Self.Empleado" />
+    <EntitySet Name="Informe" EntityType="Self.Informe" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <AssociationSet Name="FK_Asistencia_Empleado" Association="Self.FK_Asistencia_Empleado">
+      <End Role="Empleado" EntitySet="Empleado" />
+      <End Role="Asistencia" EntitySet="Asistencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk1" Association="Self.fk1">
+      <End Role="Asistencia" EntitySet="Asistencia" />
+      <End Role="Informe" EntitySet="Informe" />
+    </AssociationSet>
+    <AssociationSet Name="fk2" Association="Self.fk2">
+      <End Role="Empleado" EntitySet="Empleado" />
+      <End Role="Informe" EntitySet="Informe" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

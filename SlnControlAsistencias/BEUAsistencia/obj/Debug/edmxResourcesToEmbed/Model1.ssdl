@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="ControlAsistenciaModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Asistencia">
+    <Key>
+      <PropertyRef Name="id_asis" />
+    </Key>
+    <Property Name="id_asis" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="fecha_ingreso" Type="date" />
+    <Property Name="fecha_salida" Type="date" />
+    <Property Name="id_emp" Type="int" />
+  </EntityType>
+  <EntityType Name="Empleado">
+    <Key>
+      <PropertyRef Name="id_emp" />
+    </Key>
+    <Property Name="id_emp" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="nombre_completo" Type="varchar" MaxLength="100" />
+    <Property Name="telefono" Type="varchar" MaxLength="15" />
+    <Property Name="correo" Type="varchar" MaxLength="25" />
+    <Property Name="cedula" Type="varchar" MaxLength="13" />
+    <Property Name="lugar_nacimiento" Type="varchar" MaxLength="25" />
+    <Property Name="sexo" Type="varchar" MaxLength="1" />
+    <Property Name="estado_civil" Type="varchar" MaxLength="10" />
+    <Property Name="area_trabajo" Type="varchar" MaxLength="25" />
+  </EntityType>
+  <EntityType Name="Informe">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="pago_empleado" Type="float" />
+    <Property Name="id_asis" Type="int" />
+    <Property Name="id_emp" Type="int" />
+    <Property Name="dias_trabajo" Type="float" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <Association Name="FK_Asistencia_Empleado">
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1" />
+    <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="id_emp" />
+      </Principal>
+      <Dependent Role="Asistencia">
+        <PropertyRef Name="id_emp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk1">
+    <End Role="Asistencia" Type="Self.Asistencia" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Informe" Type="Self.Informe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Asistencia">
+        <PropertyRef Name="id_asis" />
+      </Principal>
+      <Dependent Role="Informe">
+        <PropertyRef Name="id_asis" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk2">
+    <End Role="Empleado" Type="Self.Empleado" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Informe" Type="Self.Informe" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Empleado">
+        <PropertyRef Name="id_emp" />
+      </Principal>
+      <Dependent Role="Informe">
+        <PropertyRef Name="id_emp" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="ControlAsistenciaModelStoreContainer">
+    <EntitySet Name="Asistencia" EntityType="Self.Asistencia" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Empleado" EntityType="Self.Empleado" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Informe" EntityType="Self.Informe" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Asistencia_Empleado" Association="Self.FK_Asistencia_Empleado">
+      <End Role="Empleado" EntitySet="Empleado" />
+      <End Role="Asistencia" EntitySet="Asistencia" />
+    </AssociationSet>
+    <AssociationSet Name="fk1" Association="Self.fk1">
+      <End Role="Asistencia" EntitySet="Asistencia" />
+      <End Role="Informe" EntitySet="Informe" />
+    </AssociationSet>
+    <AssociationSet Name="fk2" Association="Self.fk2">
+      <End Role="Empleado" EntitySet="Empleado" />
+      <End Role="Informe" EntitySet="Informe" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
