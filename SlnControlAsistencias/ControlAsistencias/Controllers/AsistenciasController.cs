@@ -13,8 +13,48 @@ namespace ControlAsistencias.Controllers
 {
     public class AsistenciasController : Controller
     {
-
+        Asistencia asistencia = new Asistencia();
         // GET: Asistencias
+
+        //GET: Empleado
+        [HttpGet]
+        public ActionResult Search(string Busqueda)
+        {
+            Entities db = new Entities();
+            
+            var empleado = from e in db.Empleado select e;
+            
+            if (!string.IsNullOrEmpty(Busqueda))
+            {
+                empleado = empleado.Where(se => se.cedula.EndsWith(Busqueda));
+                Empleado[] empleado1 = empleado.ToArray();
+                var entrada = from a in db.Asistencia select a.fecha_ingreso;
+                var salida = from a in db.Asistencia select a.fecha_salida;
+
+                if (entrada.Equals(DateTime.Today))
+                {
+                    asistencia.id_emp = empleado1[0].id_emp;
+                    asistencia.fecha_salida = DateTime.Today;
+                    if (ModelState.IsValid)
+                    {
+                        db.Asistencia.Add(asistencia);
+                        db.SaveChanges();
+                    }
+                }
+                else {
+                    asistencia.id_emp = empleado1[0].id_emp;
+                    asistencia.fecha_ingreso = DateTime.Today;
+                    if (ModelState.IsValid)
+                    {
+                        db.Asistencia.Attach(asistencia);
+                        db.SaveChanges();
+                    }
+                }
+
+
+            }
+            return View(empleado.ToList());
+        }
         public ActionResult Index()
         {
             return View(AsistenciaBLL.List());

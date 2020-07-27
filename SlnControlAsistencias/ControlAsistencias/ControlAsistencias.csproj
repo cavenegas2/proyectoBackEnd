@@ -186,6 +186,7 @@
     <Content Include="Views\Informes\Details.cshtml" />
     <Content Include="Views\Informes\Edit.cshtml" />
     <Content Include="Views\Informes\Index.cshtml" />
+    <Content Include="Views\Asistencias\Search.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -1,0 +1,53 @@
+﻿@model IEnumerable<BEUAsistencia.Empleado>
+@{
+    ViewBag.Title = "Buscar";
+}
+
+<h1>Buscar</h1>
+
+<br>
+<br>
+<br>
+
+<form asp-controller="Asistencias" asp-action="Search" method="get">
+    <p>
+        Cedula: <input type="text" name="Busqueda" maxlength="4" />
+        <input type="submit" value="Buscar" />
+    </p>
+</form>
+
+<br>
+<br>
+<table class="table table-hover">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.nombre_completo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.correo)
+        </th>
+       
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_completo)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.telefono)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.correo)
+            </td>
+        </tr>
+    }
+
+</table>
+
+

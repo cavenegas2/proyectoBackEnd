@@ -84,11 +84,7 @@ namespace BEUAsistencia.Transaction
             return db.Empleado.ToList();
         }
 
-        public static Empleado GetEmpleado(string cedula)
-        {
-            Entities db = new Entities();
-            return db.Empleado.FirstOrDefault(x => x.cedula.EndsWith(cedula));
-        }
+        
     }
 }
 

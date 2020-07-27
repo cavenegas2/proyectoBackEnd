@@ -14,6 +14,9 @@ namespace ControlAsistencias.Controllers
     public class EmpleadosController : Controller
     {
 
+      
+
+
         // GET: Empleados
         public ActionResult Index()
         {

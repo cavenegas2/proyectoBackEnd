@@ -80,6 +80,17 @@ namespace BEUAsistencia.Transaction
             Entities db = new Entities();
             return db.Asistencia.ToList();
         }
+
+        public void Inicio(Asistencia asistencia)
+        {
+            asistencia.fecha_ingreso = DateTime.UtcNow;
+        }
+
+
+        public void Salida(Asistencia asistencia)
+        {
+            asistencia.fecha_salida = DateTime.UtcNow;
+        }
     }
 }
 
