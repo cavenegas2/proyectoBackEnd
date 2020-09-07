@@ -29,7 +29,9 @@ namespace ControlAsistencias.Controllers
                 empleado = empleado.Where(se => se.cedula.EndsWith(Busqueda));
                 Empleado[] empleado1 = empleado.ToArray();
                 var entrada = from a in db.Asistencia select a.fecha_ingreso;
+            
                 var salida = from a in db.Asistencia select a.fecha_salida;
+          
 
                 if (entrada.Equals(DateTime.Today))
                 {
